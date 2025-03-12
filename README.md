@@ -23,20 +23,6 @@ pip install -e .
 
 This will install the `singularity-kernel-install` command globally.
 
-### Alternative: Manual Installation
-
-```bash
-# Clone the repository
-git clone https://github.com/yourusername/singularity_kernel_install.git
-cd singularity_kernel_install
-
-# Make the script executable
-chmod +x singularity_kernel_install/cli.py
-
-# Optional: create a symlink
-sudo ln -s $(pwd)/singularity_kernel_install/cli.py /usr/local/bin/singularity-kernel-install
-```
-
 ## Usage
 
 ### Basic Usage
@@ -95,19 +81,6 @@ docker build -t jupyter-container .
 ```bash
 singularity build jupyter-container.sif docker-daemon://jupyter-container:latest
 ```
-
-### Using Specialized Environments
-
-For specific environments like TensorFlow:
-
-```dockerfile
-FROM tensorflow/tensorflow:latest-gpu-jupyter
-
-# Add any additional packages
-RUN pip install --no-cache-dir pandas matplotlib seaborn
-```
-
-Convert as shown above.
 
 ## Troubleshooting
 
