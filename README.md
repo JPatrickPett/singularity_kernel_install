@@ -10,11 +10,19 @@ A tool for installing Singularity containers as Jupyter kernels, allowing you to
 
 ## Installation
 
-### Install from Source
+### Install from GitHub
+
+In just one command:
+
+```bash
+pip install git+ssh://git@github.com/JPatrickPett/singularity_kernel_install.git
+```
+
+Or by cloning the repository:
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/singularity_kernel_install.git
+git clone https://github.com/JPatrickPett/singularity_kernel_install.git
 cd singularity_kernel_install
 
 # Install the package
