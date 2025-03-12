@@ -1,0 +1,8 @@
+notebooks/
+*.egg-info/
+*.egg/
+*.pyc
+*.pyo
+*.swp
+*.log
+*.out
