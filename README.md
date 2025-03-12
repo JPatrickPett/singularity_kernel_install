@@ -4,9 +4,12 @@ A tool for installing Singularity containers as Jupyter kernels, allowing you to
 
 ## Requirements
 
-- [Singularity/Apptainer](https://apptainer.org/docs/admin/main/installation.html) (3.0+)
+Dependencies:
 - [Jupyter](https://jupyter.org/install) (notebook or lab)
 - Python 3.6+
+
+Not required for this package, but to use the kernel you will need:
+- [Singularity/Apptainer](https://apptainer.org/docs/admin/main/installation.html) (3.0+)
 
 ## Installation
 
