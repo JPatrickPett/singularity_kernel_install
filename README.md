@@ -2,6 +2,14 @@
 
 A tool for installing Singularity containers as Jupyter kernels, allowing you to run Jupyter notebooks inside isolated container environments.
 
+## TLDR
+
+```bash
+singularity-kernel-install /path/to/myimage.sif
+```
+
+Then, e.g. in JupyterLab reload the browser and select the `myimage` kernel from the menu.
+
 ## Requirements
 
 Dependencies:
