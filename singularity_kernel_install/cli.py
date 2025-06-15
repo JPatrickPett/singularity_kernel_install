@@ -32,6 +32,12 @@ def main():
         default="R",
         help="Path to R executable inside the container (default: R)",
     )
+    parser.add_argument(
+        "--bind",
+        "-b",
+        action="append",
+        help="Additional paths to bind into the container (can be used multiple times)",
+    )
 
     args = parser.parse_args()
     return install_singularity_kernel(
@@ -41,6 +47,7 @@ def main():
         language=args.language,
         python_path=args.python_path,
         r_path=args.r_path,
+        bind_paths=args.bind,
     )
 
 

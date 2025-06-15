@@ -10,6 +10,8 @@ singularity-kernel-install /path/to/myimage.sif
 
 Then, e.g. in JupyterLab reload the browser and select the `myimage` kernel from the menu.
 
+>Note: To make specific folders available in the kernel-container, supply them via the `--bind` argument when running `singularity-kernel-install`.
+
 ## Requirements
 
 Dependencies:
@@ -50,6 +52,9 @@ singularity-kernel-install /path/to/your-container.sif
 
 # Install as R kernel
 singularity-kernel-install /path/to/your-container.sif --language r
+
+# Install with additional folder bindings
+singularity-kernel-install /path/to/your-container.sif --bind /lustre:/lustre --bind /nfs:/nfs
 ```
 
 This will register a new Jupyter kernel using the container's filename as the kernel name.
@@ -61,14 +66,16 @@ This will register a new Jupyter kernel using the container's filename as the ke
 singularity-kernel-install /path/to/your-container.sif \
     --name "my-kernel" \
     --display-name "My Custom Python Kernel" \
-    --python-path "/opt/conda/bin/python"
+    --python-path "/opt/conda/bin/python" \
+    --bind /host/path:/container/path
 
 # R kernel with custom options
 singularity-kernel-install /path/to/your-container.sif \
     --language r \
     --name "my-r-kernel" \
     --display-name "My Custom R Kernel" \
-    --r-path "/usr/local/bin/R"
+    --r-path "/usr/local/bin/R" \
+    --bind /data:/data
 ```
 
 Options:
@@ -77,6 +84,12 @@ Options:
 - `--display-name` or `-d`: Set a custom kernel display name in Jupyter
 - `--python-path` or `-p`: Set the path to Python executable inside the container (default: "python")
 - `--r-path` or `-r`: Set the path to R executable inside the container (default: "R")
+- `--bind` or `-b`: Additional paths to bind into the container (can be specified multiple times)
+
+The `--bind` option allows mounting directories from the host system into the Singularity container. 
+This is useful for accessing data files or project directories directly from within the containerized 
+kernel. The format follows Singularity's bind convention: `/host/path:/container/path`.
+If only one path is provided, it will be mounted to the same location in the container.
 
 ## Creating Compatible Singularity Images
 

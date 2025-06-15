@@ -12,6 +12,7 @@ def install_singularity_kernel(
     language="python",
     python_path=None,
     r_path=None,
+    bind_paths=None,
 ):
     """Install a Singularity container as a Jupyter kernel."""
     if not os.path.exists(image_path):
@@ -34,15 +35,27 @@ def install_singularity_kernel(
     if not r_path:
         r_path = "R"
 
+    # Basic singularity command with connection file binding
+    singularity_cmd = [
+        "singularity",
+        "exec",
+        "--bind",
+        "{connection_file}:/connection-spec",
+    ]
+
+    # Add additional bind paths if specified
+    if bind_paths:
+        for path in bind_paths:
+            singularity_cmd.extend(["--bind", path])
+
+    # Add image path to the command
+    singularity_cmd.append(image_path)
+
     # Create the appropriate kernel specification based on language
     if language == "python":
         kernel_spec = {
-            "argv": [
-                "singularity",
-                "exec",
-                "--bind",
-                "{connection_file}:/connection-spec",
-                image_path,
+            "argv": singularity_cmd
+            + [
                 python_path,
                 "-m",
                 "ipykernel_launcher",
@@ -54,12 +67,8 @@ def install_singularity_kernel(
         }
     elif language == "r":
         kernel_spec = {
-            "argv": [
-                "singularity",
-                "exec",
-                "--bind",
-                "{connection_file}:/connection-spec",
-                image_path,
+            "argv": singularity_cmd
+            + [
                 r_path,
                 "--slave",
                 "-e",
